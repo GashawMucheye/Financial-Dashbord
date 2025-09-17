@@ -9,10 +9,8 @@ import {
   Pie,
   PieChart,
   Cell,
-  Tooltip,
   XAxis,
   YAxis,
-  Legend,
 } from 'recharts';
 import {
   Card,
@@ -36,6 +34,13 @@ type DataChartsProps = {
   data: FinancialData[];
 };
 
+type BarChartEntry = {
+  name: string;
+  Revenue: number;
+  Expenses: number;
+  Profit: number;
+};
+
 const COLORS = [
   'hsl(var(--chart-1))',
   'hsl(var(--chart-2))',
@@ -45,19 +50,21 @@ const COLORS = [
 ];
 
 export default function DataCharts({ data }: DataChartsProps) {
-  const barChartData = useMemo(() => {
+  const barChartData = useMemo<BarChartEntry[]>(() => {
     return data
       .filter((d) => ['Revenue', 'Expenses', 'Profit'].includes(d.category))
-      .reduce((acc, item) => {
+      .reduce<BarChartEntry[]>((acc, item) => {
         const quarter = item.label.split(' ')[0];
         let entry = acc.find((e) => e.name === quarter);
         if (!entry) {
           entry = { name: quarter, Revenue: 0, Expenses: 0, Profit: 0 };
           acc.push(entry);
         }
-        (entry as any)[item.category] += item.value;
+        if (item.category === 'Revenue') entry.Revenue += item.value;
+        if (item.category === 'Expenses') entry.Expenses += item.value;
+        if (item.category === 'Profit') entry.Profit += item.value;
         return acc;
-      }, [] as { name: string; Revenue: number; Expenses: number; Profit: number }[]);
+      }, []);
   }, [data]);
 
   const barChartConfig = {
@@ -79,34 +86,34 @@ export default function DataCharts({ data }: DataChartsProps) {
   const pieChartData = useMemo(() => {
     const expensesByCategory = data
       .filter((d) => d.category === 'Expenses')
-      .reduce((acc, item) => {
+      .reduce<Record<string, number>>((acc, item) => {
         const key = item.label.includes('Marketing')
           ? 'Marketing'
           : 'Operations';
         acc[key] = (acc[key] || 0) + item.value;
         return acc;
-      }, {} as { [key: string]: number });
-    return Object.entries(expensesByCategory).map(([name, value]) => ({
+      }, {});
+    return Object.entries(expensesByCategory).map(([name, value], index) => ({
       name,
       value,
-      fill: '',
+      fill: COLORS[index % COLORS.length],
     }));
   }, [data]);
 
   const pieChartConfig = useMemo(() => {
     const config: ChartConfig = {};
-    pieChartData.forEach((entry, index) => {
+    pieChartData.forEach((entry) => {
       config[entry.name] = {
         label: entry.name,
-        color: COLORS[index % COLORS.length],
+        color: entry.fill,
       };
-      entry.fill = COLORS[index % COLORS.length];
     });
     return config;
   }, [pieChartData]);
 
   return (
     <div className='grid gap-6 md:grid-cols-2 sm:grid-cols-1'>
+      {/* Bar Chart */}
       <Card>
         <CardHeader>
           <CardTitle>Quarterly Performance</CardTitle>
@@ -134,6 +141,8 @@ export default function DataCharts({ data }: DataChartsProps) {
           </ChartContainer>
         </CardContent>
       </Card>
+
+      {/* Line Chart */}
       <Card>
         <CardHeader>
           <CardTitle>Profit Trend</CardTitle>
@@ -160,12 +169,14 @@ export default function DataCharts({ data }: DataChartsProps) {
                 dataKey='Profit'
                 stroke='var(--color-Profit)'
                 strokeWidth={2}
-                dot={true}
+                dot
               />
             </LineChart>
           </ChartContainer>
         </CardContent>
       </Card>
+
+      {/* Pie Chart */}
       <Card className='md:col-span-2'>
         <CardHeader>
           <CardTitle>Expense Distribution</CardTitle>
