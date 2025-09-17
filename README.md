@@ -1,4 +1,4 @@
-# Finicial Dashbord by using Next.js with TypeScript ,shdcn-ui,genkit
+# Financial Dashbord by using Next.js with TypeScript ,shdcn-ui,genkit
 
 ```js
 npx create-next-app@latest
