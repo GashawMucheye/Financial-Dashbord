@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import DashboardHeader from '@/components/dashboard/header';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 

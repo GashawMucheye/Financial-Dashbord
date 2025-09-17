@@ -1,0 +1,88 @@
+import { FinancialData } from './types';
+
+export const initialFinancialData: FinancialData[] = [
+  {
+    id: '1',
+    label: 'Q1 Sales',
+    value: 150000,
+    category: 'Revenue',
+    date: '2024-03-31',
+  },
+  {
+    id: '2',
+    label: 'Q1 Marketing',
+    value: 25000,
+    category: 'Expenses',
+    date: '2024-03-31',
+  },
+  {
+    id: '3',
+    label: 'Q1 Operations',
+    value: 45000,
+    category: 'Expenses',
+    date: '2024-03-31',
+  },
+  {
+    id: '4',
+    label: 'Q1 Profit',
+    value: 80000,
+    category: 'Profit',
+    date: '2024-03-31',
+  },
+  {
+    id: '5',
+    label: 'Q2 Sales',
+    value: 180000,
+    category: 'Revenue',
+    date: '2024-06-30',
+  },
+  {
+    id: '6',
+    label: 'Q2 Marketing',
+    value: 30000,
+    category: 'Expenses',
+    date: '2024-06-30',
+  },
+  {
+    id: '7',
+    label: 'Q2 Operations',
+    value: 50000,
+    category: 'Expenses',
+    date: '2024-06-30',
+  },
+  {
+    id: '8',
+    label: 'Q2 Profit',
+    value: 100000,
+    category: 'Profit',
+    date: '2024-06-30',
+  },
+  {
+    id: '9',
+    label: 'Q3 Sales',
+    value: 210000,
+    category: 'Revenue',
+    date: '2024-09-30',
+  },
+  {
+    id: '10',
+    label: 'Q3 Marketing',
+    value: 35000,
+    category: 'Expenses',
+    date: '2024-09-30',
+  },
+  {
+    id: '11',
+    label: 'Q3 Operations',
+    value: 55000,
+    category: 'Expenses',
+    date: '2024-09-30',
+  },
+  {
+    id: '12',
+    label: 'Q3 Profit',
+    value: 120000,
+    category: 'Profit',
+    date: '2024-09-30',
+  },
+];
