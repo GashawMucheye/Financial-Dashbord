@@ -54,8 +54,17 @@ const dataInsightsSummaryFlow = ai.defineFlow(
     inputSchema: DataInsightsSummaryInputSchema,
     outputSchema: DataInsightsSummaryOutputSchema,
   },
-  async (input: any) => {
+  // async (input: any) => {
+  //   const { output } = await prompt(input);
+  //   return output!;
+  // }
+  async (
+    input: DataInsightsSummaryInput
+  ): Promise<DataInsightsSummaryOutput> => {
     const { output } = await prompt(input);
-    return output!;
+    if (!output) {
+      throw new Error('No output generated from dataInsightsSummaryPrompt');
+    }
+    return output;
   }
 );

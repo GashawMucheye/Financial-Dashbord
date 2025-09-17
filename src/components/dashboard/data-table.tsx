@@ -165,7 +165,8 @@ export default function DataTable({
             <AlertDialogTitle>Are you sure?</AlertDialogTitle>
             <AlertDialogDescription>
               This action cannot be undone. This will permanently delete the
-              financial record for "{selectedData?.label}".
+              financial record for&nbsp;
+              <strong>&quot;{selectedData?.label}&quot;</strong>.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
