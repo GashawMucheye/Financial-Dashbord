@@ -24,7 +24,7 @@ export default function DashboardHeader({ addData }: DashboardHeaderProps) {
 
   return (
     <header className='sticky top-0 z-10 flex h-16 shrink-0 items-center gap-4 border-b bg-background/80 px-4 backdrop-blur-sm sm:px-6'>
-      <SidebarTrigger className='md:hidden' />
+      <SidebarTrigger className='md:hidden flex-shrink-0' />
       <div className='flex-1'>
         <h1 className='text-lg font-semibold sm:text-xl md:text-2xl'>
           Dashboard
@@ -42,11 +42,21 @@ export default function DashboardHeader({ addData }: DashboardHeaderProps) {
           </div>
         </form>
         <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-          <Button onClick={() => setIsSheetOpen(true)} size='sm'>
+          <Button
+            onClick={() => setIsSheetOpen(true)}
+            size='sm'
+            variant='secondary'
+          >
             <Plus className='h-4 w-4 md:mr-2' />
-            <span className='hidden md:inline'>Add Data</span>
+            <span className='add_button'>Add Data</span>
           </Button>
-          <SheetContent>
+          <SheetContent
+            style={{
+              backgroundColor: 'steelblue',
+              color: 'white',
+              padding: '12px',
+            }}
+          >
             <SheetHeader>
               <SheetTitle>Add New Financial Data</SheetTitle>
               <SheetDescription>

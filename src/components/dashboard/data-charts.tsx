@@ -106,7 +106,7 @@ export default function DataCharts({ data }: DataChartsProps) {
   }, [pieChartData]);
 
   return (
-    <div className='grid gap-6 md:grid-cols-2'>
+    <div className='grid gap-6 md:grid-cols-2 sm:grid-cols-1'>
       <Card>
         <CardHeader>
           <CardTitle>Quarterly Performance</CardTitle>
