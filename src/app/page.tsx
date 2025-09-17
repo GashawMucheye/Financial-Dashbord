@@ -1,14 +1,9 @@
-import DashboardHeader from '@/components/dashboard/header';
-import { Button } from '@/components/ui/button';
+import Dashboard from '@/components/dashboard/dashboard';
+
 import React from 'react';
 
 const Home = () => {
-  return (
-    <div className='bg-red-500'>
-      finance dashboard
-      <Button>Click me</Button>
-    </div>
-  );
+  return <Dashboard />;
 };
 
 export default Home;

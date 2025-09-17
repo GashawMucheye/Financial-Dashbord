@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { Toaster } from '@/components/ui/toaster';
+
 import './globals.css';
 import DashboardHeader from '@/components/dashboard/header';
 
@@ -19,6 +21,8 @@ export default function RootLayout({
     <html lang='en' className={inter.variable}>
       <body className='antialiased min-h-screen bg-background font-body'>
         {children}
+
+        <Toaster />
       </body>
     </html>
   );
